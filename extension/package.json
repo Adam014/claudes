@@ -1,0 +1,70 @@
+{
+  "name": "claude-layout",
+  "displayName": "Claude layout",
+  "description": "Lays out three Claude Code terminals in the active window: Bohuslav | Radomír on top, Vendelín at the bottom. Trigger with `claudes` in the integrated terminal.",
+  "publisher": "rustai",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onStartupFinished",
+    "onUri"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "claudeLayout.open",
+        "title": "Claude: open layout (Bohuslav | Radomír / Vendelín)"
+      }
+    ],
+    "configuration": {
+      "title": "Claude layout",
+      "properties": {
+        "claudeLayout.auto": {
+          "type": "boolean",
+          "default": false,
+          "description": "Also open the three Claude terminals automatically whenever a folder is opened (otherwise only on `claudes` / the command)."
+        },
+        "claudeLayout.sessions": {
+          "type": "array",
+          "default": [
+            {
+              "name": "Bohuslav",
+              "column": 1,
+              "model": "opus",
+              "icon": "person",
+              "color": "terminal.ansiGreen"
+            },
+            {
+              "name": "Radomír",
+              "column": 2,
+              "model": "opus",
+              "icon": "person",
+              "color": "terminal.ansiYellow"
+            },
+            {
+              "name": "Vendelín",
+              "column": 3,
+              "model": "",
+              "icon": "star",
+              "color": "terminal.ansiBlue"
+            }
+          ],
+          "description": "Terminals to open. Columns 1 and 2 are the top row, 3 is the bottom row. Empty model = Claude default. icon = any codicon name, color = a terminal.ansi* theme color."
+        },
+        "claudeLayout.delayMs": {
+          "type": "number",
+          "default": 400,
+          "description": "Pause between starting the terminals, in milliseconds."
+        },
+        "claudeLayout.boot": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play the boot sequence in each terminal before Claude starts."
+        }
+      }
+    }
+  }
+}
